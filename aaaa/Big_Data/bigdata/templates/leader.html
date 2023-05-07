@@ -1,0 +1,629 @@
+<html>
+
+<head>
+<title>校级趋势展示</title>
+
+    {% load static %}
+    <script src="http://cdn.bootcss.com/echarts/3.2.3/echarts.min.js"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/china.js' %}"></script>
+    <script src="{% static 'echarts-all.js' %}"></script>
+</head>
+
+<body >
+     <div id="main1" style="background:#00f;left:0%;top:0%;position:absolute;width:25%;height:100%">
+         <div id="main10" style="background:#000;width:100%;height:5%"></div>
+         <div id="main11" style="background:#0ff;width:100%;height:45%"></div>
+         <div id="main12" style="background:#f0f;width:100%;height:50%"></div>
+     </div>
+
+     <div id="main2" style="background:#0f0;position:absolute;left:25%;top:0%;width:50%;height:100%">
+         <div style="text-align:center;background:#000;width:100%;height:15%;">
+             <br><br>
+             <font size="17" color="yellow">校级趋势展示</font>
+         </div>
+         <div id="main21" style="background:#ff0;width:100%;height:50%"></div>
+         <div id="main22" style="background:#000;width:100%;height:35%"></div>
+     </div>
+
+     <div id="main3" style="background:#f00;position:absolute;left:75%;top:0%;width:25%;height:100%">
+        <div id="main31" style="background:#00f;width:100%;height:45%"></div>
+        <div id="main32" style="background:#f00;width:100%;height:55%"></div>
+     </div>
+
+</body >
+
+// 基于准备好的dom，初始化echarts实例
+<script type="text/javascript">
+    var myChart11 = echarts.init(document.getElementById('main11'),"dark");
+	var myChart12 = echarts.init(document.getElementById('main12'),"dark");
+	var myChart21 = echarts.init(document.getElementById('main21'),"dark");
+	var myChart22 = echarts.init(document.getElementById('main22'),"dark");
+	var myChart31 = echarts.init(document.getElementById('main31'),"dark");
+	var myChart32 = echarts.init(document.getElementById('main32'),"dark");
+</script>
+
+//画图
+<script type="text/javascript">
+
+    function paint_22(){
+        option = {
+            backgroundColor: '#000000',
+            title : {
+                text: '历年等级考试通过率',
+                textStyle:{
+                    color:'#fff'
+                }
+            },
+            tooltip : {
+                trigger: 'axis'
+            },
+            legend: {
+                data:['英语四级','英语六级','计算机二级']
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            xAxis : [
+                {
+                    type : 'category',
+                    axisLabel : {
+                        textStyle:{
+                            color:'#fff'
+                        }
+                    },
+                    boundaryGap : false,
+                    data : ['2012','2013','2014','2015','2016','2017','2018']
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    axisLabel : {
+                        formatter: '{value} %',
+                        textStyle:{
+                            color:'#fff'
+                        }
+                    }
+                }
+
+            ],
+            series : [
+                {
+                    name:'英语四级',
+                    type:'line',
+                    data:[70, 50, 60, 80, 82, 75, 90],
+                    markPoint : {
+                        data : [
+                            {type : 'max', name: '最大值'},
+                            {type : 'min', name: '最小值'}
+                        ]
+                    },
+                    markLine : {
+                        data : [
+                            {type : 'average', name: '平均值'}
+                        ]
+                    }
+                },
+                {
+                    name:'英语六级',
+                    type:'line',
+                    data:[20, 50, 30, 46, 30, 49, 52],
+                    markLine : {
+                        data : [
+                            {type : 'average', name : '平均值'}
+                        ]
+                    }
+                },
+                {
+                    name:'计算机二级',
+                    type:'line',
+                    data:[20, 50, 80, 50, 30, 49, 52],
+                }
+            ]
+        };
+        myChart22.setOption(option);
+    }
+
+    function paint_21(){
+        option = {
+            backgroundColor: '#000000',
+            title : {
+                        text: '历年毕业生去向',
+                        textStyle:{
+                            color:'#fff'
+                        }
+                    },
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            legend: {
+                data:['升研率','就业率','出国率','其他']
+            },
+            toolbox: {
+                show : true,
+                orient: 'vertical',
+                x: 'right',
+                y: 'center',
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['2012','2013','2014','2015','206','2017','2018'],
+                    axisLabel : {
+                        textStyle:{
+                            color:'#fff'
+                        }
+                    }
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    axisLabel : {
+                        formatter: '{value} %',
+                        textStyle:{
+                            color:'#fff'
+                        }
+                    }
+                }
+            ],
+            series : [
+                {
+                    name:'升研率',
+                    type:'bar',
+                    data:[30, 40, 57, 61, 62, 64, 60]
+                },
+                {
+                    name:'就业率',
+                    type:'bar',
+                    data:[80, 60, 40, 40, 30, 30, 30]
+                },
+                {
+                    name:'出国率',
+                    type:'bar',
+                    stack: '广告',
+                    data:[3, 4, 10, 20, 15, 20, 25]
+                },
+                {
+                    name:'其他',
+                    type:'bar',
+                    data:[10, 8, 13, 5, 7, 1, 3]
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart21.clear();
+        myChart21.setOption(option);
+    }
+
+    function paint_31(){
+        option = {
+            backgroundColor: '#000000',
+             title : {
+                        text: '今年招生质量',
+                        textStyle:{
+                            color:'#fff'
+                        }
+                    },
+            tooltip : {
+                show: true,
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            series : [
+                {
+                    name:'招生来源',
+                    type:'pie',
+                    clockWise:true,
+                    startAngle: 200,
+                    radius : [60, 100],
+                    itemStyle :　{
+                        normal : {
+                            label : {
+                                show : true
+                            },
+                            labelLine : {
+                                show : true
+                            }
+                        },
+                        emphasis : {
+                            label : {
+                                show : true,
+                                position :'inner',
+                                formatter : "{d}%",
+                                textStyle : {
+                                    color : 'yellow',
+                                    fontSize : '20',
+                                    fontFamily : '微软雅黑',
+                                    fontWeight : 'bold'
+                                }
+                            }
+                        }
+                    },
+                    data:[
+                        {value:335, name:'三位一体'},
+                        {value:310, name:'艺术生'},
+                        {value:234, name:'特长生'},
+                        {value:135, name:'超录取线50分以上'},
+                        {value:1548, name:'其他'}
+                    ],
+                }
+            ]
+        };
+
+
+        myChart31.clear();
+        myChart31.setOption(option);
+    }
+
+    function paint_11(){
+        option = {
+            backgroundColor: '#000000',
+
+            title : {
+                text: '历年竞赛成果',
+                subtext: '虚构数据',
+                textStyle:{
+                    color:'#fff'
+                }
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{b}: {c}"
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : false,
+            series : [
+                {
+                    type:'treemap',
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true,
+                                formatter: "{b}"
+                            },
+                            borderWidth: 1
+                        },
+                        emphasis: {
+                            label: {
+                                show: true
+                            }
+                        }
+                    },
+                    data:[
+                        {
+                            name: '数学建模竞赛国家奖',
+                            value: 6
+                        },
+                        {
+                            name: '创业杯国家奖',
+                            value: 4
+                        },
+                        {
+                            name: '数学建模竞赛省奖',
+                            value: 10
+                        },
+                        {
+                            name: '创业杯省奖',
+                            value: 8
+                        },
+                        {
+                            name: '全国化学竞赛国家奖',
+                            value: 6
+                        },
+                        {
+                            name: '全国化学竞赛省奖',
+                            value: 1
+                        },
+                        {
+                            name: '全国十佳中学生',
+                            value: 1
+                        }
+                    ]
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart11.clear();
+        myChart11.setOption(option);
+}
+
+    function paint_12(){
+        option = {
+            backgroundColor: '#000000',
+            title : {
+                text: '历年科研成果',
+                textStyle:{
+                    color:'#fff'
+                }
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            series : [
+                {
+                    type:'tree',
+                    orient: 'horizontal',  // vertical horizontal
+
+                    roam: true,
+
+                    itemStyle: {
+                        normal: {
+                            color: '#4883b4',
+                            label: {
+                                show: true,
+                                position: 'top',
+                                formatter: "{b}",
+                                textStyle: {
+                                    color: '#bbff2e',
+                                    fontSize: 5
+                                }
+                            },
+                            lineStyle: {
+                                color: '#ccc',
+                                type: 'curve' // 'curve'|'broken'|'solid'|'dotted'|'dashed'
+
+                            }
+                        },
+                        emphasis: {
+                            color: '#4883b4',
+                            label: {
+                                show: false
+                            },
+                            borderWidth: 0
+                        }
+                    },
+
+                    data: [
+                        {"name":"科研成果",
+                        "children":[
+                            {"name":"浙江理工大学",
+                            "children":[{"name":"成果1"},
+                                        {"name":"成果2"},
+                                        {"name":"成果3"}]}]
+                    }
+            ]
+        }]};
+        myChart12.clear();
+        myChart12.setOption(option);
+}
+
+    function paint_32(){
+        function createRandomItemStyle() {
+            return {
+                normal: {
+                    color: 'rgb(' + [
+                        Math.round(Math.random() * 160),
+                        Math.round(Math.random() * 160),
+                        Math.round(Math.random() * 160)
+                    ].join(',') + ')'
+                }
+            };
+        }
+        option = {
+            backgroundColor: '#000000',
+            title: {
+                text: '浙理评论分析',
+                subtext: '数据分析，每周更新',
+                textStyle:{
+                    color:'#fff'
+                }
+            },
+            tooltip: {
+                show: true
+            },
+            series: [{
+                type: 'wordCloud',
+                size: ['80%', '80%'],
+                textRotation : [0, 45, 90, -45],
+                textPadding: 0,
+                autoSize: {
+                    enable: true,
+                    minSize: 14
+                },
+                data: [
+                    {
+                        name: "一本院校",
+                        value: 10000,
+                        itemStyle: {
+                            normal: {
+                                color: 'black'
+                            }
+                        }
+                    },
+                    {
+                        name: "数学建模屡获大奖",
+                        value: 6181,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "丝绸学院",
+                        value: 4386,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "新盖了大楼",
+                        value: 4055,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "理学院最牛",
+                        value: 2467,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "食堂不错",
+                        value: 2244,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "网红食堂",
+                        value: 1898,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "文泽路地铁口旁边",
+                        value: 1484,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "华元",
+                        value: 1112,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "我爱浙理",
+                        value: 965,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "后花园很美",
+                        value: 847,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "服装学院很厉害",
+                        value: 582,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "就业率高",
+                        value: 555,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "KXAN",
+                        value: 550,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "Mary Ellen Mark",
+                        value: 462,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "Farrah Abraham",
+                        value: 366,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "Rita Ora",
+                        value: 360,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "Serena Williams",
+                        value: 282,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "NCAA baseball tournament",
+                        value: 273,
+                        itemStyle: createRandomItemStyle()
+                    },
+                    {
+                        name: "Point Break",
+                        value: 265,
+                        itemStyle: createRandomItemStyle()
+                    }
+                ]
+            }]
+        };
+
+        myChart32.clear();
+        myChart32.setOption(option);
+}
+
+</script>
+
+<script type="text/javascript">
+function reload() {
+    var formdata = new FormData;
+    formdata.append("id2",'{{ id }}');
+    $.ajax({
+        type : "post",
+        url : "class_monitor",
+        dataType : "json", //返回数据形式为json
+        data : formdata,
+        async: false,
+        cache: false,
+        processData:false,  // 告诉jquery不转换数据
+        contentType:false,  // 告诉jquery不设置内容格式
+        success : function(json) {
+            map_data= json.map_data;
+            max_data= json.max_data;
+            sex=json.sex;
+            type=json.type;
+            mz=json.mz;
+            mz_num=json.mz_num;
+            first_name=json.first_name;
+            zhibiao=json.zhibiao;
+
+            paint_map(map_data,max_data);
+            paint_sex(sex);
+            paint_type(type);
+            paint_mz(mz,mz_num);
+            paint_name(first_name);
+            paint_zhibiao(zhibiao);
+        },
+        error : function(errorMsg) {
+            alert("不好意思，数据请求失败啦!");
+        }
+  });
+}
+window.onload=function(){
+    paint_21();
+    paint_22();
+    paint_31();
+    paint_11();
+    paint_12();
+    paint_32();
+
+}
+// setInterval("reload()",3000);  //15秒钟执行一次
+</script>
+
+</html>

@@ -1,0 +1,226 @@
+﻿<%@ page contentType="text/html; charset=UTF-8"%> 和
+<meta charset="utf-8"/>
+<!doctype html>
+<html>
+<head>
+    <title>myEmail</title>
+    {% load static %}
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/log_in.css' %}" type="text/css" media="all">
+</head>
+<body>
+<div class="container">
+    <div class="item1">邮箱管理系统</div>
+    <br><br><br>
+    <!--登陆界面	-->
+    <div class="item2" id="main_form">
+        <div class="family">
+            欢迎登录
+            <div class="blank-space"></div>
+        </div>
+        <div class="item-pass">
+
+            <div class="item-pass-user item-margin1">
+                <div class="item-user">账号：</div>
+                <div class="item-user1">
+                    <input id="user" type="text" placeholder="请输入用户名" size="18" maxlength="50"/>
+                </div>
+            </div>
+
+            <div class="item-pass-user " style="margin-top:20px">
+                <div class="item-user">密码：</div>
+                <div class="item-user1">
+                    <input id="pwd" type="password" placeholder="请输入密码" size="18" maxlength="50"/>
+                </div>
+            </div>
+
+            <div class="item-pass item-margin2">
+                <div class="btn-one" id="regist" onmouseover="this.style.cursor='pointer'"
+                     onmouseout="this.style.cursor='default'">去注册
+                </div>
+
+                <div class="btn-two" id="log_in" onmouseover="this.style.cursor='pointer'"
+                     onmouseout="this.style.cursor='default'">登录
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--注册界面-->
+    <div style="display:none" class="item2" id="regist_form">
+        <div class="family">
+            欢迎注册
+            <div class="blank-space"></div>
+        </div>
+        <div class="item-pass">
+
+            <div class="item-pass-user " style="margin-top:20px">
+                <div class="item-user">昵称：</div>
+                <div class="item-user1">
+                    <input id="name_r" type="text" placeholder="请输入真实姓名" size="18" maxlength="50"/>
+                </div>
+            </div>
+
+            <div class="item-pass-user " style="margin-top:10px">
+
+                <div class="item-user">账号：</div>
+                <div class="item-user1">
+                    <input id="user_r" type="text" placeholder="请输入用户名" size="18" maxlength="50"/>
+                </div>
+            </div>
+
+            <div class="item-pass-user item-margin2">
+                <div class="item-user">密码：</div>
+                <div class="item-user1">
+                    <input id="pwd_r" type="password" placeholder="请输入密码" size="18" maxlength="50"/>
+                </div>
+            </div>
+
+            <div class="item-pass item-margin2">
+                <div class="btn-one" id="go_back" onmouseover="this.style.cursor='pointer'"
+                     onmouseout="this.style.cursor='default'">去登陆
+                </div>
+                <div class="btn-two" id="regist_r" onmouseover="this.style.cursor='pointer'"
+                     onmouseout="this.style.cursor='default'">注册
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--下标-->
+
+
+</div>
+
+</body>
+
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+    //登陆函数
+    function fun_Log_in(user, pwd) {
+        $.ajaxSettings.async = false;
+        var formdata = new FormData;
+        formdata.append("user", user);
+        formdata.append("pwd", pwd);
+        $.ajax({
+            type: "post",
+            url: "Log_in",
+            dataType: "json", //返回数据形式为json
+            data: formdata,
+            async: false,
+            cache: false,
+            processData: false,  // 告诉jquery不转换数据
+            contentType: false,  // 告诉jquery不设置内容格式
+            success: function (json) {
+                result = json.result;
+                if (result == 1) {
+                   alert('登陆成功!');
+                    url = json.url;
+                    window.location.href = url
+                }
+                else  {
+                    alert(result);
+                    // $("#user").val("");
+                    // $("#pwd").val("")
+                }
+
+            },
+            error: function (errorMsg) {
+                alert("不好意思，数据请求失败啦!");
+            }
+        });
+    }
+
+    //注册函数
+    function fun_regist(name, user, pwd) {
+        $.ajaxSettings.async = false;
+        var formdata = new FormData;
+        formdata.append("name", name);
+        formdata.append("user", user);
+        formdata.append("pwd", pwd);
+        $.ajax({
+            type: "post",
+            url: "Regist",
+            dataType: "json", //返回数据形式为json
+            data: formdata,
+            async: false,
+            cache: false,
+            processData: false,  // 告诉jquery不转换数据
+            contentType: false,  // 告诉jquery不设置内容格式
+            success: function (json) {
+                result = json.result
+                if (result == 1) {
+                    alert('注册成功')
+                    $("#main_form").slideDown("slow");
+                    $("#regist_form").slideUp("slow");
+                }
+                else {
+                    alert("该用户名已被注册，请更换！")
+                }
+            },
+            error: function (errorMsg) {
+                alert("不好意思，数据请求失败啦!");
+            }
+        });
+    }
+
+    //“去登陆”按钮对应函数
+    $(document).ready(function () {
+        $("#go_back").click(function () {
+            $("#main_form").slideDown("slow");
+            $("#regist_form").slideUp("slow");
+            $("#name_r").val("").focus();
+            $("#user_r").val("");
+            $("#pwd_r").val("");
+        });
+    });
+    //“注册”按钮对应函数
+    $(document).ready(function () {
+        $("#regist_r").click(function () {
+            var name = $("#name_r").val();
+            var user = $("#user_r").val();
+            var pwd = $("#pwd_r").val();
+
+            if ((name == "") || (user == "") || (pwd == "")) {
+                alert("请完善账号信息");
+            }
+            else if (pwd.length < 8) {
+                alert("密码强度较弱，需要8位以上！")
+            }
+            else if (user == "2014326601017") {
+                alert("该账号已被注册！")
+            }
+            else {
+                $("#name_r").val("");
+                $("#user_r").val("");
+                $("#pwd_r").val("");
+                fun_regist(name, user, pwd);
+            }
+        });
+    });
+    //“去注册”按钮对应函数
+    $(document).ready(function () {
+        $("#regist").click(function () {
+            $("#main_form").slideUp("slow");
+            $("#regist_form").slideDown("slow");
+        });
+    });
+    //“登陆”按钮对应函数
+    $(document).ready(function () {
+        $("#log_in").click(function () {
+            user = $("#user").val();
+            pwd = $("#pwd").val();
+            if (user == "" || pwd == "") {
+                alert("请完善登陆信息！")
+            }
+            else {
+                fun_Log_in(user, pwd)
+            }
+        });
+    });
+</script>
+
+</html>

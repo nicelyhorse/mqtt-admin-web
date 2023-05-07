@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>财报谈</title>
+    <!--&lt;!&ndash; 新 Bootstrap 核心 CSS 文件 &ndash;&gt;-->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 可选的Bootstrap主题文件（一般不使用） -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% load staticfiles %}
+    <script src="{% static 'js/echarts.js' %}"></script>
+</head>
+<style type="text/css">
+    /*居中，圆角，有边框文字居中且距离上边框50px*/
+    .div1 {
+        margin: 0 auto; /*居中排列*/
+        background: #358a8b;
+        border: 2px solid darkslategray;
+        border-radius: 30px;
+        text-align: center;
+        line-height: 100px;
+    }
+
+    .select1 {
+        margin: 0 auto;
+        background: #358a8b;
+        border: 2px solid darkslategray;
+        border-radius: 15px;
+        text-align: center;
+        width: 120px;
+        line-height: 50px;
+    }
+
+</style>
+
+
+<body style="background-color: #cccccc">
+<br>
+<div class="div1" style="width:80%;height:100px"><h1>{{stockCode}}{{stockName}}</h1></div>
+<br>
+<div class="div1" style="width:80%;height:1200px;">
+    <h2>具体数据</h2>
+    <table id='table' class="table table-striped">
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+    <div style="width:100%;height:300px;" id="P1">
+    </div>
+    <div style="width:100%;height:300px;" id="P2">
+    </div>
+    <div style="width:100%;height:300px;" id="P3">
+    </div>
+
+
+</div>
+
+
+</body>
+
+
+<script type="text/javascript">
+    function makeP1(x, y) {
+        var P1 = echarts.init(document.getElementById('P1'));
+        option = {
+            title: {
+                x: 'center',
+                text: '每股利润',
+                textStyle: {
+                    color: 'pink',
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    crossStyle: {
+                        color: '#999'
+                    }
+                },
+            },
+
+
+            xAxis: [
+                {
+                    data: x,
+                    axisLabel: {
+                        color: "white",
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '每股利润（元）',
+                    nameLocation: 'end',
+                    nameTextStyle: {
+                        color: "white"
+                    },
+                    axisLabel: {
+                        color: "white",
+                        formatter: '{value}'
+                    },
+
+                },
+            ],
+            series: [
+                {
+                    name: '每股利润图',
+                    type: 'line',
+                    barWidth: 10,
+                    itemStyle: {
+                        normal: {
+                            // 随机显示
+                            // color:function(d){return "#"+Math.floor(Math.random()*(256*256*256-1)).toString(16);}
+
+                            // 定制显示（按顺序）
+                            color: function (params) {
+                                var colorList = ['#C33531', '#EFE42A', '#64BD3D', '#EE9201', '#29AAE3', '#B74AE5', '#0AAF9F', '#E89589', '#16A085', '#4A235A', '#C39BD3 ', '#F9E79F', '#BA4A00', '#ECF0F1', '#616A6B', '#EAF2F8', '#4A235A', '#3498DB'];
+                                return colorList[params.dataIndex]
+                            }
+                        },
+                    },
+                    data: y,
+                    markLine: {
+                        data: [
+                            {type: 'average', name: '平均值'}
+                        ]
+                    }
+                },
+
+            ]
+        };
+
+        P1.setOption(option);
+    }
+
+    function makeP2(x, y) {
+        var P2 = echarts.init(document.getElementById('P2'));
+        option = {
+            title: {
+                x: 'center',
+                text: '利润增速图',
+                textStyle: {
+                    color: 'pink',
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    crossStyle: {
+                        color: '#999'
+                    }
+                },
+            },
+
+
+            xAxis: [
+                {
+                    data: x,
+                    axisLabel: {
+                        color: "white",
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '利润增速（%）',
+                    nameLocation: 'end',
+                    nameTextStyle: {
+                        color: "white"
+                    },
+                    axisLabel: {
+                        color: "white",
+                        formatter: '{value}'
+                    },
+
+                },
+            ],
+            series: [
+                {
+                    name: '利润增速',
+                    type: 'line',
+                    barWidth: 10,
+                    itemStyle: {
+                        normal: {
+                            // 随机显示
+                            // color:function(d){return "#"+Math.floor(Math.random()*(256*256*256-1)).toString(16);}
+
+                            // 定制显示（按顺序）
+                            color: function (params) {
+                                var colorList = ['#C33531', '#EFE42A', '#64BD3D', '#EE9201', '#29AAE3', '#B74AE5', '#0AAF9F', '#E89589', '#16A085', '#4A235A', '#C39BD3 ', '#F9E79F', '#BA4A00', '#ECF0F1', '#616A6B', '#EAF2F8', '#4A235A', '#3498DB'];
+                                return colorList[params.dataIndex]
+                            }
+                        },
+                    },
+                    data: y,
+                    markLine: {
+                        data: [
+                            {type: 'average', name: '平均值'}
+                        ]
+                    }
+                },
+
+            ]
+        };
+
+        P2.setOption(option);
+    }
+
+    function makeP3(x, y) {
+        var P3 = echarts.init(document.getElementById('P3'));
+        option = {
+            title: {
+                x: 'center',
+                text: '总营收收入图',
+                textStyle: {
+                    color: 'pink',
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    crossStyle: {
+                        color: '#999'
+                    }
+                },
+            },
+            xAxis: [
+                {
+                    data: x,
+                    axisLabel: {
+                        color: "white",
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '总营收收入（亿元）',
+                    nameLocation: 'end',
+                    nameTextStyle: {
+                        color: "white"
+                    },
+                    axisLabel: {
+                        color: "white",
+                        formatter: '{value}'
+                    },
+
+                },
+            ],
+            series: [
+                {
+                    name: '总营收收入',
+                    type: 'line',
+                    barWidth: 10,
+                    itemStyle: {
+                        normal: {
+                            // 随机显示
+                            // color:function(d){return "#"+Math.floor(Math.random()*(256*256*256-1)).toString(16);}
+
+                            // 定制显示（按顺序）
+                            color: function (params) {
+                                var colorList = ['#C33531', '#EFE42A', '#64BD3D', '#EE9201', '#29AAE3', '#B74AE5', '#0AAF9F', '#E89589', '#16A085', '#4A235A', '#C39BD3 ', '#F9E79F', '#BA4A00', '#ECF0F1', '#616A6B', '#EAF2F8', '#4A235A', '#3498DB'];
+                                return colorList[params.dataIndex]
+                            }
+                        },
+                    },
+                    data: y,
+                    markLine: {
+                        data: [
+                            {type: 'average', name: '平均值'}
+                        ]
+                    }
+                },
+
+            ]
+        };
+
+        P3.setOption(option);
+    }
+
+
+    function getStockInfo() {
+        var formdata = new FormData;
+        formdata.append("order", "getStockInfo");
+        formdata.append("stockCode", "{{stockCode}}");
+        $.ajax({
+            type: "post",
+            dataType: "json", //返回数据形式为json
+            data: formdata,
+            async: false,
+            cache: false,
+            processData: false,  // 告诉jquery不转换数据
+            contentType: false,  // 告诉jquery不设置内容格式
+            success: function (json) {
+                status = json.status;
+                if (status == 'ok') {
+                    x = json.x;
+                    y = json.y;
+                    xb = json.xb;
+                    html = "<tr><td>时间</td>";
+                    for (i = 0; i < x.length; i++) {
+                        html += "<td>" + x[i] + "</td>"
+                    }
+                    html += "</tr><tr><td>每股收益</td>";
+                    for (j = 0; j < y[0].length; j++) {
+                        html += "<td>" + y[0][j] + "</td>"
+                    }
+                    html += "</tr><tr><td>利润增速</td><td>--</td>";
+
+                    for (k = 0; k < y[1].length; k++) {
+                        html += "<td>" + y[1][k] + "%</td>"
+                    }
+
+                    html += "</tr><tr><td>营业总收入</td>";
+                    for (l = 0; l < y[2].length; l++) {
+                        html += "<td>" + y[2][l] + "</td>"
+                    }
+                    html += "</tr>";
+                    $("#tbody").html(html);
+                    makeP1(x, y[0]);
+                    makeP2(xb, y[1]);
+                    makeP3(x, y[2]);
+
+                    // htmla = "<tr><td>每股收益</td>";
+                    // for (i = 0; i < y[0].length; i++) {
+                    //     htmla += "<td>" + y[0][i] + "</td>"
+                    // }
+                    // $("#y").html(htmla);
+                    // htmlb = "<td>利润增速</td><td>---</td>";
+                    // for (i = 0; i < y2.length; i++) {
+                    //     html += "<td>" + y2[i] + "</td>"
+                    // }
+                    // $("#y2").html(html);
+                    // html = "<td>营业总收入</td>";
+                    // for (i = 0; i < y3.length; i++) {
+                    //     html += "<td>" + y3[i] + "</td>"
+                    // }
+                    // $("#y3").html(html);
+
+
+                } else {
+                    alert(status)
+                }
+            },
+            error: function (errorMsg) {
+                alert("不好意思，数据请求失败啦!");
+            }
+        });
+    }
+
+    getStockInfo()
+</script>
+
+</html>

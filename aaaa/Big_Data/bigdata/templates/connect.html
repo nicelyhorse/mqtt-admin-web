@@ -1,0 +1,139 @@
+<html>
+
+<head>
+    <title>联系人列表</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 可选的Bootstrap主题文件（一般不使用） -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style type="text/css">
+
+    .button1 {
+        margin: 0 auto;
+        background: #358a8b;
+        border: 2px solid darkslategray;
+        border-radius: 15px;
+        text-align: center;
+        width: 80px;
+    }
+
+    .select1 {
+        margin: 0 auto;
+        background: #358a8b;
+        border: 2px solid darkslategray;
+        border-radius: 15px;
+        text-align: center;
+        width: 120px;
+        line-height: 50px;
+    }
+
+</style>
+<body style="background: #358a8b;">
+<div id="main10" style="width:100%;height:80%; " align="center">
+    <h2>新建联系人</h2><br>
+    请输入昵称：<input id='name' placeholder="请输入昵称" size="25" maxlength="10">
+    请输入域名：<input id='account' placeholder="xiaohuaidan@myemail.com" size="25" maxlength="50">
+    <button value="add" class="button1" onclick="add()">添加</button><br>
+    <h2>小主的联系人列表</h2>
+    <table class="table table-striped">
+        <caption>联系人列表</caption>
+        <thead id="tTitle">
+        <th>昵称</th>
+        <th>账户</th>
+        <th>添加时间</th>
+        <th>操作</th>
+        </thead>
+        <tbody id="tBody">
+
+        </tbody>
+    </table>
+</div>
+<br>
+<hr>
+
+
+</body>
+
+<script type="text/javascript">
+    function connect() {
+        var formdata = new FormData;
+        formdata.append("order", "connect");
+        $.ajax({
+            type: "post",
+            dataType: "json", //返回数据形式为json
+            data: formdata,
+            async: false,
+            cache: false,
+            processData: false,  // 告诉jquery不转换数据
+            contentType: false,  // 告诉jquery不设置内容格式
+            success: function (json) {
+                var html = "";
+                result = json.result;
+                for (i = 0; i < result.length; i++) {
+                    html += "<tr>";
+                    html += "<td>" + result[i][1] + "</td>";
+                    html += "<td>" + result[i][2] + "</td>";
+                    html += "<td>" + result[i][3] + "</td>";
+                    html += "<td><a onclick=\"delEmail('" + result[i][0] + "')\">删除</a></td>";
+                    html += "</tr >";
+                }
+                $("#tBody").html(html);
+
+            },
+            error: function (errorMsg) {
+                alert("不好意思，数据请求失败啦!");
+            }
+        });
+    }
+
+    function delEmail(ids) {
+        var formdata = new FormData;
+        formdata.append("order", "delEmail");
+        formdata.append("ids", ids);
+        $.ajax({
+            type: "post",
+            dataType: "json", //返回数据形式为json
+            data: formdata,
+            async: false,
+            cache: false,
+            processData: false,  // 告诉jquery不转换数据
+            contentType: false,  // 告诉jquery不设置内容格式
+            success: function (json) {
+                connect()
+            },
+            error: function (errorMsg) {
+                alert("不好意思，数据请求失败啦!");
+            }
+        });
+    }
+
+    function add() {
+        var formdata = new FormData;
+        formdata.append("order", "add");
+        formdata.append("name", $("#name").val());
+        formdata.append("account", $("#account").val());
+        $.ajax({
+            type: "post",
+            dataType: "json", //返回数据形式为json
+            data: formdata,
+            async: false,
+            cache: false,
+            processData: false,  // 告诉jquery不转换数据
+            contentType: false,  // 告诉jquery不设置内容格式
+            success: function (json) {
+                alert(json.result);
+                connect()
+            },
+            error: function (errorMsg) {
+                alert("不好意思，数据请求失败啦!");
+            }
+        });
+    }
+
+    connect()
+</script>
+
+</html>

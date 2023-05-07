@@ -1,0 +1,278 @@
+﻿body{
+	background-color:#ffffff;
+}
+.container{
+	background-color:#fff;
+	top:0px;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	position:absolute;
+}
+.head{
+	width:200px;
+	height:60px;
+	top:0px;
+	left:0px;
+	position:absolute;
+	background-color:rgb(3,57,95);
+}
+.picture{
+	width:40px;
+	height:40px;
+	margin-top:10px;
+	margin-left:25px;
+	margin-right:15px;
+	background-image:url("../image/1.jpg");
+	background-repeat:no-repeat;
+	background-size:39px 39px;
+	border:1px solid #fff;
+	border-radius:25px;
+	opacity:0.9;
+	float:left;
+}
+.font{
+	width:100px;
+	height:40px;
+	margin-top:10px;
+	float:left;
+}
+.font1{
+	height:20px;
+	font-size:15px;
+	letter-spacing:1px;
+	color:#fff;
+}
+.font2{
+	padding-top:4px;
+	height:20px;
+	font-size:12px;
+	letter-spacing:4px;
+	color:#fff;
+	float:left;
+}
+.radius{
+	width:5px;
+	height:5px;
+	margin-top:5px;
+	margin-right:5px;
+	background-color:#fff;
+	border-radius:5px;
+	float:left;
+}
+
+.top{
+	height:60px;
+	left:200px;
+	top:0px;
+	right:0px;
+	position:absolute;
+	background-color:rgb(15,79,125);
+}
+.top-one{
+	width:20px;
+	height:20px;
+	margin-top:20px;
+	background-size:20px 20px;
+	float:left;	
+}
+.lefts{
+	margin-left:40px;
+	background-image:url("../image/arrow-left.png");
+	background-repeat:no-repeat;
+}
+.rights{
+	margin-left:20px;
+	background-image:url("../image/arrow-right.png");
+}
+.refreshes{
+	margin-left:20px;
+	background-image:url("../image/refresh.png");
+	-moz-transform:rotate(0deg);
+	transition:0.5s -moz-transform;
+}
+.top-content input{
+	margin-top:18px;
+	margin-left:20px;
+	height:20px;
+	width:300px;
+	border:1px solid #ccc;
+	background-image:url("../image/search.png");
+	background-repeat:no-repeat;
+	background-size:15px 15px;
+	background-position:280px center;
+}
+.exit{
+	width:40px;
+	height:30px;
+	margin-top:-25px;
+	margin-right:0px;
+	padding-right:40px;
+	font-size:18px;
+	color:#fff;
+	float:right;
+}
+
+.left{
+	width:200px;
+	top:60px;
+	left:0px;
+	bottom:0px;
+	position:absolute;
+	background-color:rgb(15,79,125);
+}
+.menu{
+	margin-left:35px;
+	margin-top:15px;
+	font-size:15px;
+	letter-spacing:4px;
+	height:30px;
+	color:#fff;
+}
+.menu-content{
+	width:200px;
+	height:30px;
+	color:white;
+	text-align:center;
+	font-size:12px;
+	line-height:30px;
+}
+.menu-one{
+	width:50px;
+	margin-left:75px;
+}
+.menu-content:hover{
+	background-color:rgb(3,57,95);
+}
+.pictures{
+	width:15px;
+	height:15px;
+	margin-left:40px;
+	margin-top:7px;
+	background-size:15px 15px;
+	float:left;
+}
+.one{
+	background-image:url("../image/wxb.png");
+}
+.two{
+	background-image:url("../image/set.png");
+}
+.three{
+	background-image:url("../image/wxbm.png");
+}
+.four{
+	background-image:url("../image/integral.png");
+}
+.five{
+	background-image:url("../image/form.png");
+}
+.six{
+	background-image:url("../image/wxb.png");
+}
+.seven{
+	background-image:url("../image/wxb.png");
+}
+
+.content{
+	top:60px;
+	left:200px;
+	right:0px;
+	bottom:0px;
+	position:absolute;
+	background-color:#fff;
+}
+.content-head{
+	height:60px;
+	margin-left:0px;
+	margin-top:0px;
+	margin-right:0px;
+	border-bottom:2px solid #ccc;
+}
+.first{
+	height:56px;
+	width:150px;
+	margin-left:45px;
+	text-align:center;
+	line-height:60px;
+	font-size:25px;
+	color:rgb(15,79,125);
+	border-bottom:4px solid rgb(15,79,125);
+}
+.press{
+	width:50px;
+	height:20px;
+	background-color:rgb(15,79,125);
+	margin-top:10px;
+	margin-bottom:10px;
+	float:left;
+	font-size:12px;
+	text-align:center;
+	line-height:16px;
+	color:#fff;
+}
+.press-one{
+	margin-left:50px;
+}
+.press-two{
+	margin-left:10px;
+}
+.margin-left-one{
+	margin-top:2px;
+	margin-left:4px;
+	background-image:url("../image/add.png");
+	background-size:15px 15px;
+	background-repeat:no-repeat;
+}
+.margin-left-two{
+	margin-top:2px;
+	margin-left:4px;
+	background-image:url("../image/share.png");
+	background-size:15px 15px;
+	background-repeat:no-repeat;
+}
+.table{
+	margin-top:40px;
+	margin-left:48px;
+	margin-right:0px;
+}
+.checkbox{
+	margin-left:5px;
+	width:0px;
+	height:0px;
+}
+table{
+	margin-right:0px;
+}
+tr{
+	height:20px;
+}
+tr:nth-child(2n+1){
+	background-color:#ccc;
+}
+td{
+	width:200px;
+	text-align:center;
+	line-height:30px;
+}
+.image{
+	width:15px;
+	height:15px;
+	background-size:15px 15px;
+	float:left;
+}
+.image-one{
+	margin-left:80px;
+	background-image:url("../image/edit.png");
+}
+.image-two{
+	margin-left:5px;
+	background-image:url("../image/delete.png");
+}
+
+.end{
+	margin-left:60px;
+	margin-top:30px;
+
+}
+

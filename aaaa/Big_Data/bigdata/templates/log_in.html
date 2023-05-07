@@ -1,0 +1,224 @@
+﻿<%@ page contentType="text/html; charset=UTF-8"%> 和
+<meta charset="utf-8"/>
+<!doctype html>
+<html>
+<head>
+    <title>myEmail</title>
+    {% load static %}
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/log_in.css' %}" type="text/css" media="all">
+</head>
+<body>
+<div class="container">
+    <div class="item1">Email Management System</div>
+    <br><br><br>
+    <!--login interface-->
+    <div class="item2" id="main_form">
+        <div class="family">
+            Welcome to login
+            <div class="blank-space"></div>
+        </div>
+        <div class="item-pass">
+
+            <div class="item-pass-user item-margin1">
+                <div class="item-user">Account:</div>
+                <div class="item-user1">
+                    <input id="user" type="text" placeholder="Please Enter your User Name" size="18" maxlength="50"/>
+                </div>
+            </div>
+
+            <div class="item-pass-user " style="margin-top:20px">
+                <div class="item-user">Password:</div>
+                <div class="item-user1">
+                    <input id="pwd" type="password" placeholder="Please Enter your Password" size="18" maxlength="50"/>
+                </div>
+            </div>
+
+            <div class="item-pass item-margin2">
+                <div class="btn-one" id="regist" onmouseover="this.style.cursor='pointer'"
+                     onmouseout="this.style.cursor='default'">Sign Up
+                </div>
+
+                <div class="btn-two" id="log_in" onmouseover="this.style.cursor='pointer'"
+                     onmouseout="this.style.cursor='default'">Log In
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--Registration interface-->
+    <div style="display:none" class="item2" id="regist_form">
+        <div class="family">
+            Welcome to register
+            <div class="blank-space"></div>
+        </div>
+        <div class="item-pass">
+
+            <div class="item-pass-user " style="margin-top:20px">
+                <div class="item-user">Username:</div>
+                <div class="item-user1">
+                    <input id="name_r" type="text" placeholder="Please enter your desired username" size="18" maxlength="50"/>
+                </div>
+            </div>
+
+            <div class="item-pass-user " style="margin-top:10px">
+
+                <div class="item-user">Account:</div>
+                <div class="item-user1">
+                    <input id="user_r" type="text" placeholder="Enter a user name here" size="18" maxlength="50"/>
+                </div>
+            </div>
+
+            <div class="item-pass-user item-margin2">
+                <div class="item-user">Password</div>
+                <div class="item-user1">
+                    <input id="pwd_r" type="password" placeholder="Enter the password" size="18" maxlength="50"/>
+                </div>
+            </div>
+
+            <div class="item-pass item-margin2">
+                <div class="btn-one" id="go_back" onmouseover="this.style.cursor='pointer'"
+                     onmouseout="this.style.cursor='default'">To log in
+                </div>
+                <div class="btn-two" id="regist_r" onmouseover="this.style.cursor='pointer'"
+                     onmouseout="this.style.cursor='default'">Confirm Registration
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+</body>
+
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+    //Fuction for Log in
+    function fun_Log_in(user, pwd) {
+        $.ajaxSettings.async = false;
+        var formdata = new FormData;
+        formdata.append("user", user);
+        formdata.append("pwd", pwd);
+        $.ajax({
+            type: "post",
+            url: "Log_in",
+            dataType: "json", 
+            data: formdata,
+            async: false,
+            cache: false,
+            processData: false,  // 告诉jquery不转换数据
+            contentType: false,  // 告诉jquery不设置内容格式
+            success: function (json) {
+                result = json.result;
+                if (result == 1) {
+                   alert('LOG IN SUCCESSFULLY!');
+                    url = json.url;
+                    window.location.href = url
+                }
+                else  {
+                    alert(result);
+                    // $("#user").val("");
+                    // $("#pwd").val("")
+                }
+
+            },
+            error: function (errorMsg) {
+                alert("Sorry, Unable to retrieve the data!");
+            }
+        });
+    }
+
+    //注册函数
+    function fun_regist(name, user, pwd) {
+        $.ajaxSettings.async = false;
+        var formdata = new FormData;
+        formdata.append("name", name);
+        formdata.append("user", user);
+        formdata.append("pwd", pwd);
+        $.ajax({
+            type: "post",
+            url: "Regist",
+            dataType: "json", //返回数据形式为json
+            data: formdata,
+            async: false,
+            cache: false,
+            processData: false,  // 告诉jquery不转换数据
+            contentType: false,  // 告诉jquery不设置内容格式
+            success: function (json) {
+                result = json.result
+                if (result == 1) {
+                    alert('Register Successfully!')
+                    $("#main_form").slideDown("slow");
+                    $("#regist_form").slideUp("slow");
+                }
+                else {
+                    alert("The username has been registered, please use a new one!")
+                }
+            },
+            error: function (errorMsg) {
+                alert("Sorry, Unable to retrieve the data!");
+            }
+        });
+    }
+
+    //“去登陆”按钮对应函数
+    $(document).ready(function () {
+        $("#go_back").click(function () {
+            $("#main_form").slideDown("slow");
+            $("#regist_form").slideUp("slow");
+            $("#name_r").val("").focus();
+            $("#user_r").val("");
+            $("#pwd_r").val("");
+        });
+    });
+    //“注册”按钮对应函数
+    $(document).ready(function () {
+        $("#regist_r").click(function () {
+            var name = $("#name_r").val();
+            var user = $("#user_r").val();
+            var pwd = $("#pwd_r").val();
+
+            if ((name == "") || (user == "") || (pwd == "")) {
+                alert("Please complete your account information!");
+            }
+            else if (pwd.length < 8) {
+                alert("The password is weak and needs more than 8 digits!")
+            }
+            else if (user == "2014326601017") {
+                alert("The account has been registered!")
+            }
+            else {
+                $("#name_r").val("");
+                $("#user_r").val("");
+                $("#pwd_r").val("");
+                fun_regist(name, user, pwd);
+            }
+        });
+    });
+    //“去注册”按钮对应函数
+    $(document).ready(function () {
+        $("#regist").click(function () {
+            $("#main_form").slideUp("slow");
+            $("#regist_form").slideDown("slow");
+        });
+    });
+    //“登陆”按钮对应函数
+    $(document).ready(function () {
+        $("#log_in").click(function () {
+            user = $("#user").val();
+            pwd = $("#pwd").val();
+            if (user == "" || pwd == "") {
+                alert("Please complete your account information!")
+            }
+            else {
+                fun_Log_in(user, pwd)
+            }
+        });
+    });
+</script>
+
+</html>

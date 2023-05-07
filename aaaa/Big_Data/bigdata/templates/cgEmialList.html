@@ -1,0 +1,113 @@
+<html>
+
+<head>
+    <title>邮件列表</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 可选的Bootstrap主题文件（一般不使用） -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style type="text/css">
+
+    .button1 {
+        margin: 0 auto;
+        background: #358a8b;
+        border: 2px solid darkslategray;
+        border-radius: 15px;
+        text-align: center;
+        width: 80px;
+    }
+
+    .select1 {
+        margin: 0 auto;
+        background: #358a8b;
+        border: 2px solid darkslategray;
+        border-radius: 15px;
+        text-align: center;
+        width: 120px;
+        line-height: 50px;
+    }
+
+</style>
+<body style="background: #358a8b;">
+<div id="main10" style="width:100%;height:80%; " align="center">
+    <h2>草稿箱列表</h2>
+    <table class="table table-striped">
+        <caption>已收到邮件</caption>
+        <thead id="tTitle">
+        <th>收件人</th>
+        <th>内容</th>
+        <th>时间</th>
+        <th>操作</th>
+        </thead>
+        <tbody id="tBody">
+
+        </tbody>
+    </table>
+</div>
+<br>
+<hr>
+
+
+</body>
+
+<script type="text/javascript">
+    function cgEmailList() {
+        var formdata = new FormData;
+        formdata.append("order", "cgEmailList");
+        $.ajax({
+            type: "post",
+            dataType: "json", //返回数据形式为json
+            data: formdata,
+            async: false,
+            cache: false,
+            processData: false,  // 告诉jquery不转换数据
+            contentType: false,  // 告诉jquery不设置内容格式
+            success: function (json) {
+                var html = "";
+                result = json.result;
+                for (i = 0; i < result.length; i++) {
+                    html += "<tr>";
+                    html += "<td>" + result[i][1] + "</td>";
+                    html += "<td>" + result[i][2] + "</td>";
+                    html += "<td>" + result[i][3] + "</td>";
+                    html += "<td><a href='reWriteEmai/?ids=" + result[i][0] + "'>查看</a>   " +
+                        "<a onclick=\"delEmail('" + result[i][0] + "')\">删除</a></td>";
+                    html += "</tr >";
+                }
+                $("#tBody").html(html);
+
+            },
+            error: function (errorMsg) {
+                alert("不好意思，数据请求失败啦!");
+            }
+        });
+    }
+
+    function delEmail(ids) {
+        var formdata = new FormData;
+        formdata.append("order", "delEmail");
+        formdata.append("ids", ids);
+        $.ajax({
+            type: "post",
+            dataType: "json", //返回数据形式为json
+            data: formdata,
+            async: false,
+            cache: false,
+            processData: false,  // 告诉jquery不转换数据
+            contentType: false,  // 告诉jquery不设置内容格式
+            success: function (json) {
+                cgEmailList()
+            },
+            error: function (errorMsg) {
+                alert("不好意思，数据请求失败啦!");
+            }
+        });
+    }
+
+    cgEmailList()
+</script>
+
+</html>
