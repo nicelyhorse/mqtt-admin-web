@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>写信</title>
+    <title>Write Emial</title>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
     <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
@@ -42,15 +42,15 @@
 </style>
 <body style="background: #358a8b;">
 <div id="main10" style="width:100%;height:80%; " align="center">
-    <h2>您可重新编辑信件内容并转发</h2>
+    <h2>Re-edit the content of the email and send it</h2>
     <br>
     <br>
-    请输入对方域名：<input id='name' placeholder="请输入对方域名" size="50" maxlength="50" class="writeEmail">
+    Please enter the opposing Email Address:<input id='name' placeholder="Opposing Email Address" size="50" maxlength="50" class="writeEmail">
     &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
-    <button value="查询" class="button1" onclick="writeEmail('writeEmail','fs')">发送</button>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
-    <button value="查询" class="button1" onclick="writeEmail('saveEmail','cg')">保存</button>
+    <button value="查询" class="button1" onclick="writeEmail('writeEmail','fs')">Send</button>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+    <button value="查询" class="button1" onclick="writeEmail('saveEmail','cg')">Save</button>
     <br><br>
-    <textarea id='emailInfo' class="mainInfo" placeholder="请输入正文"></textarea>
+    <textarea id='emailInfo' class="mainInfo" placeholder="Please enter the main text"></textarea>
 
 
 </div>
@@ -77,7 +77,7 @@
                 alert(result);
             },
             error: function (errorMsg) {
-                alert("不好意思，数据请求失败啦!");
+                alert("Sorry, the data request failed!");
             }
         });
     }
