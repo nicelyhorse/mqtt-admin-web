@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>联系人列表</title>
+    <title>Contact List</title>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!-- 可选的Bootstrap主题文件（一般不使用） -->
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
@@ -33,18 +33,18 @@
 </style>
 <body style="background: #358a8b;">
 <div id="main10" style="width:100%;height:80%; " align="center">
-    <h2>新建联系人</h2><br>
-    请输入昵称：<input id='name' placeholder="请输入昵称" size="25" maxlength="10">
-    请输入域名：<input id='account' placeholder="xiaohuaidan@myemail.com" size="25" maxlength="50">
+    <h2>New Contact</h2><br>
+    Please enter the username：<input id='name' placeholder="请输入昵称" size="25" maxlength="10">
+    Please enter the emailaddress：<input id='account' placeholder="xiaohuaidan@myemail.com" size="25" maxlength="50">
     <button value="add" class="button1" onclick="add()">添加</button><br>
-    <h2>小主的联系人列表</h2>
+    <h2>My Contact List</h2>
     <table class="table table-striped">
-        <caption>联系人列表</caption>
+        <caption>Contact List</caption>
         <thead id="tTitle">
-        <th>昵称</th>
-        <th>账户</th>
-        <th>添加时间</th>
-        <th>操作</th>
+        <th>Username</th>
+        <th>Emailadress</th>
+        <th>Addtiontime</th>
+        <th>Edit</th>
         </thead>
         <tbody id="tBody">
 
@@ -84,7 +84,7 @@
 
             },
             error: function (errorMsg) {
-                alert("不好意思，数据请求失败啦!");
+                alert("Sorry, the data request failed!");
             }
         });
     }
@@ -105,7 +105,7 @@
                 connect()
             },
             error: function (errorMsg) {
-                alert("不好意思，数据请求失败啦!");
+                alert("Sorry, the data request failed!");
             }
         });
     }
@@ -128,7 +128,7 @@
                 connect()
             },
             error: function (errorMsg) {
-                alert("不好意思，数据请求失败啦!");
+                alert("Sorry, the data request failed!");
             }
         });
     }
