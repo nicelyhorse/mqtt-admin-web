@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>邮件列表</title>
+    <title>Email List</title>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!-- 可选的Bootstrap主题文件（一般不使用） -->
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
@@ -33,14 +33,14 @@
 </style>
 <body style="background: #358a8b;">
 <div id="main10" style="width:100%;height:80%; " align="center">
-    <h2>草稿箱列表</h2>
+    <h2>Draft List</h2>
     <table class="table table-striped">
-        <caption>已收到邮件</caption>
+        <caption>Received Email</caption>
         <thead id="tTitle">
-        <th>收件人</th>
-        <th>内容</th>
-        <th>时间</th>
-        <th>操作</th>
+        <th>Recipient</th>
+        <th>Content</th>
+        <th>When</th>
+        <th>Edit</th>
         </thead>
         <tbody id="tBody">
 
@@ -73,15 +73,15 @@
                     html += "<td>" + result[i][1] + "</td>";
                     html += "<td>" + result[i][2] + "</td>";
                     html += "<td>" + result[i][3] + "</td>";
-                    html += "<td><a href='reWriteEmai/?ids=" + result[i][0] + "'>查看</a>   " +
-                        "<a onclick=\"delEmail('" + result[i][0] + "')\">删除</a></td>";
+                    html += "<td><a href='reWriteEmai/?ids=" + result[i][0] + "'>view</a>   " +
+                        "<a onclick=\"delEmail('" + result[i][0] + "')\">delete</a></td>";
                     html += "</tr >";
                 }
                 $("#tBody").html(html);
 
             },
             error: function (errorMsg) {
-                alert("不好意思，数据请求失败啦!");
+                alert("Sorry, the data request failed!");
             }
         });
     }
@@ -102,7 +102,7 @@
                 cgEmailList()
             },
             error: function (errorMsg) {
-                alert("不好意思，数据请求失败啦!");
+                alert("Sorry, the data request failed!");
             }
         });
     }
