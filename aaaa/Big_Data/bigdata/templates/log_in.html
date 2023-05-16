@@ -110,8 +110,8 @@
             data: formdata,
             async: false,
             cache: false,
-            processData: false,  // 告诉jquery不转换数据
-            contentType: false,  // 告诉jquery不设置内容格式
+            processData: false,  
+            contentType: false,  
             success: function (json) {
                 result = json.result;
                 if (result == 1) {
@@ -132,7 +132,7 @@
         });
     }
 
-    //注册函数
+    //Function for registing new email account
     function fun_regist(name, user, pwd) {
         $.ajaxSettings.async = false;
         var formdata = new FormData;
@@ -142,12 +142,12 @@
         $.ajax({
             type: "post",
             url: "Regist",
-            dataType: "json", //返回数据形式为json
+            dataType: "json", 
             data: formdata,
             async: false,
             cache: false,
-            processData: false,  // 告诉jquery不转换数据
-            contentType: false,  // 告诉jquery不设置内容格式
+            processData: false,  
+            contentType: false,  
             success: function (json) {
                 result = json.result
                 if (result == 1) {
@@ -165,7 +165,7 @@
         });
     }
 
-    //“去登陆”按钮对应函数
+    //Function for login button
     $(document).ready(function () {
         $("#go_back").click(function () {
             $("#main_form").slideDown("slow");
@@ -175,7 +175,7 @@
             $("#pwd_r").val("");
         });
     });
-    //“注册”按钮对应函数
+    //Function for regist button
     $(document).ready(function () {
         $("#regist_r").click(function () {
             var name = $("#name_r").val();
@@ -199,14 +199,14 @@
             }
         });
     });
-    //“去注册”按钮对应函数
+    //Function for regist button
     $(document).ready(function () {
         $("#regist").click(function () {
             $("#main_form").slideUp("slow");
             $("#regist_form").slideDown("slow");
         });
     });
-    //“登陆”按钮对应函数
+    //Function for login button
     $(document).ready(function () {
         $("#log_in").click(function () {
             user = $("#user").val();
