@@ -47,8 +47,8 @@
     <br>
     Please enter opposing Email Address:<input id='name' placeholder="Opposing Email Address" size="50" maxlength="50" class="writeEmail">
     &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
-    <button value="查询" class="button1" onclick="writeEmail('writeEmail','fs')">Send</button>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
-    <button value="查询" class="button1" onclick="writeEmail('saveEmail','cg')">Save</button>
+    <button value="search" class="button1" onclick="writeEmail('writeEmail','fs')">Send</button>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+    <button value="search" class="button1" onclick="writeEmail('saveEmail','cg')">Save</button>
     <br><br>
     <textarea id='emailInfo' class="mainInfo" placeholder="Please enter the main text"></textarea>
 
@@ -66,12 +66,12 @@
         formdata.append("type", type);
         $.ajax({
             type: "post",
-            dataType: "json", //返回数据形式为json
+            dataType: "json",
             data: formdata,
             async: false,
             cache: false,
-            processData: false,  // 告诉jquery不转换数据
-            contentType: false,  // 告诉jquery不设置内容格式
+            processData: false,  
+            contentType: false,  
             success: function (json) {
                 result = json.result;
                 alert(result);
