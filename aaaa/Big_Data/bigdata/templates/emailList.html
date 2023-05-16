@@ -59,12 +59,12 @@
         formdata.append("order", "getEmailList");
         $.ajax({
             type: "post",
-            dataType: "json", //返回数据形式为json
+            dataType: "json", //To return the datat in json
             data: formdata,
             async: false,
             cache: false,
-            processData: false,  // 告诉jquery不转换数据
-            contentType: false,  // 告诉jquery不设置内容格式
+            processData: false,  
+            contentType: false,  
             success: function (json) {
                 var html = "";
                 result = json.result;
@@ -92,12 +92,12 @@
         formdata.append("ids", ids);
         $.ajax({
             type: "post",
-            dataType: "json", //返回数据形式为json
+            dataType: "json", 
             data: formdata,
             async: false,
             cache: false,
-            processData: false,  // 告诉jquery不转换数据
-            contentType: false,  // 告诉jquery不设置内容格式
+            processData: false,  
+            contentType: false,  
             success: function (json) {
                 getEmailList()
             },
